@@ -1,0 +1,7 @@
+package kr.or.ddit.mapper.bmk;
+
+public interface FindLibraryMapper {
+
+	public String getAddress(String ae_id);
+
+}

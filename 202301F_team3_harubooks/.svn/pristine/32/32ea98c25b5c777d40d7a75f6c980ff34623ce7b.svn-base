@@ -1,0 +1,43 @@
+package kr.or.ddit.controller.ljy.pub;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.or.ddit.service.ljy.RemainMngService;
+import kr.or.ddit.vo.ljy.RemainMngVO;
+import lombok.extern.slf4j.Slf4j;
+
+@Controller
+@Slf4j
+@RequestMapping("/pub/remain")
+public class RemainPubRestController {
+
+	@Autowired
+	private RemainMngService remainService;
+	
+	@ResponseBody
+	@GetMapping("/list/{ae_id}")
+	public List<RemainMngVO> remainPubList(
+			@PathVariable String ae_id,
+			@RequestParam(name = "page", required = false, defaultValue = "1") int currentPage
+			) {
+		RemainMngVO remainMngVO = new RemainMngVO();
+		remainMngVO.setAe_id(ae_id);
+		remainMngVO.setCurrentPage(currentPage);
+		String id = SecurityContextHolder.getContext().getAuthentication().getName();
+		//String ae_id = remainMngVO.getAe_id();
+		log.info("remainPubList controller 도착");
+		//log.info("ae_id" + remainMngVO.getAe_id());
+		log.info("id" + id);
+		return remainService.remainPubList(remainMngVO);
+		//return remainService.remainPubList(ae_id);
+	}
+}

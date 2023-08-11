@@ -1,0 +1,14 @@
+package kr.or.ddit.vo.bmk;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+public class FindLibraryVO {
+	
+	private String mbr_addr;
+	private String ae_id;
+}
